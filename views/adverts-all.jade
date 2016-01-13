@@ -1,0 +1,41 @@
+//- view/adverts-all.jade
+extend layout
+
+block head
+  style
+    | img{width: 100px}
+
+block content
+  h1
+    | Adverts
+  
+  .advert-add-new
+    a.btn.btn-success(href="/adverts/add")
+      | Add new advert
+    
+  ul.pagination
+    - for(var i = 1; i <= pages; i++)
+      li
+        if i == page
+          a.current(href="/products?page=" + i)
+            =i
+        else
+          a(href="/products?page=" + i)
+            =i
+    
+  ul.media-list
+    each advert in data
+      li.media
+        .media-left
+          a
+            if advert.image
+              img.media-object(src=advert.image)
+            else
+              img.media-object(src="images/advert-default.jpg")
+        .media-body
+          h2.media-heading= advert.name
+          p= advert.description
+          em= advert.date
+          br
+          a.btn(href='/advert/' + advert._id)
+            | View details
