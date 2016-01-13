@@ -20,5 +20,6 @@ let advertSchema = new mongoose.Schema({
   image: String
 });
 
-
 mongoose.model('Advert', advertSchema);
+
+module.exports.schema = advertSchema;

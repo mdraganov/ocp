@@ -38,18 +38,18 @@ module.exports = function(Advert) {
     },
     getById: function(req, res) {
       let id = req.params.id;
-      Advert.findById(id, function(err, product) {
+      Advert.findById(id, function(err, advert) {
         if (err) {
           throw err;
         }
 
-        if (!product) {
+        if (!advert) {
           res.redirect('error-not-found');
           return;
         }
 
         res.render('advert-details', {
-          data: product
+          data: advert
         });
       });
     },
