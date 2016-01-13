@@ -6,7 +6,7 @@ let express = require('express'),
   mongoose = require('mongoose');
 
 module.exports = function(app) {
-  let connectionString = "mongodb://localhost/it-gallery";
+  let connectionString = "mongodb://localhost/ocp-db";
   mongoose.connect(connectionString);
 
   app.use(express.static(path.join(__dirname, '../public')));

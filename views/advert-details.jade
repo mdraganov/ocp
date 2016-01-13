@@ -2,8 +2,19 @@
 
 extend layout
 
+block head
+  style
+    | img{width: 500px}
+
 block content
-  h2= data.name
-  span= data.price
-  p= data.description
-  img(src=data.image)
+  .row
+    .col-md-3
+      h2.media-heading= data.name
+      span= data.price
+      p= data.description
+    .col-md-9
+      if data.image
+        img.media-object(src=data.image)
+      else
+        img.media-object(src='../images/advert-default.jpg')
+
