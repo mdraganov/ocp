@@ -1,0 +1,15 @@
+//- views/user-details.jade
+
+extend layout
+
+block content
+    .row
+        .col-md-3
+            h2.media-heading= data.name
+        .col-md-9
+            ul
+            each ad in data.adverts
+                li
+                    ad.name
+
+
