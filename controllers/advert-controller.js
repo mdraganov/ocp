@@ -5,7 +5,7 @@
 const DEFAULT_PAGE = 1;
 const DEFAULT_SIZE = 10;
 
-module.exports = function(Advert) {
+module.exports = function(Advert, app) {
   let controller = {
     get: function(req, res) {
       let page = req.query.page || DEFAULT_PAGE;
@@ -61,16 +61,22 @@ module.exports = function(Advert) {
         reqAdvert.image = req.file.path.substr('public'.length);
       }
 
+      console.log(app.locals.currentUser);
+
       let advert = new Advert({
         name: reqAdvert.name,
         description: reqAdvert.description,
         price: +reqAdvert.price,
         image: reqAdvert.image,
+        owner: {
+          name: app.locals.currentUser.username,
+          id: app.locals.currentUser._id
+        }
       });
 
       advert.save(function(err) {
         if (err) {
-          throw err;
+          console.log(err);
         }
 
         res.status(201)

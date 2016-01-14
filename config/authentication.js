@@ -7,7 +7,8 @@ module.exports = {
             if (!user) {
                 res.send({success: false})
             }
-            res.locals.currentUser = req.user;
+            //console.log(user);
+            res.locals.currentUser = user;
             req.logIn(user, function (err) {
                 if (err) return next(err);
                 res.redirect('/');

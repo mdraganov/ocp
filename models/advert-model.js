@@ -4,20 +4,39 @@
 let mongoose = require('mongoose');
 
 let advertSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  date: {
-    type: Date,
-    required: true,
-    default: function() {
-      return Date.now();
+    name: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true,
+        default: function () {
+            return Date.now();
+        }
+    },
+    price: {
+        type: Number
+    },
+    owner: {
+        name: String,
+        id: String
+    },
+    description: {
+        type: String
+    },
+    image: {
+        type: String
+    },
+    comments: {
+        type: Array
+    },
+    votes: {
+        type: Number
+    },
+    categoryId: {
+        type: Number
     }
-  },
-  description: String,
-  price: Number,
-  image: String
 });
 
 mongoose.model('Advert', advertSchema);

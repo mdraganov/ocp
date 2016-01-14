@@ -21,16 +21,16 @@ var upload = multer({
 
 let router = new express.Router();
 
-let mongoose = require('mongoose');
-let Advert = mongoose.model('Advert');
-
-let controller = require('../controllers/advert-controller')(Advert);
-
-router.get('/', controller.get)
-    .get('/add', controller.getForm)
-    .get('/:id', controller.getById)
-    .post('/', upload.single('image-file'), controller.post);
-
 module.exports = function (app) {
+    let mongoose = require('mongoose');
+    let Advert = mongoose.model('Advert');
+
+    let controller = require('../controllers/advert-controller')(Advert, app);
+
+    router.get('/', controller.get)
+        .get('/add', controller.getForm)
+        .get('/:id', controller.getById)
+        .post('/', upload.single('image-file'), controller.post);
+
     app.use('/adverts', router);
 };
