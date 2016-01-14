@@ -31,10 +31,12 @@ module.exports = function(Advert, app) {
         });
     },
     getForm: function(req, res) {
-      //check if user is authenticated
-      res.render('advert-add');
-      //else
-      //res.redirect('login');
+      if (app.locals.currentUser){
+        res.render('advert-add');
+      }
+      else {
+        res.redirect('/login');
+      }
     },
     getById: function(req, res) {
       let id = req.params.id;

@@ -5,7 +5,7 @@ module.exports = {
         var auth = passport.authenticate('local', function (err, user) {
             if (err) return next(err);
             if (!user) {
-                res.send({success: false})
+                res.send('<h1>Wrong credentials!</h1><a href="/login">Try again.</a>')
             }
             //console.log(user);
             res.locals.currentUser = user;
