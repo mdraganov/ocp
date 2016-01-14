@@ -40,6 +40,8 @@ module.exports = function (Advert, app, Category) {
         },
         getById: function (req, res) {
             let id = req.params.id;
+            var page = req.params.page || DEFAULT_PAGE;
+            var size = req.params.page || DEFAULT_SIZE;
             Advert.findById(id, function (err, advert) {
                 if (err) {
                     throw err;

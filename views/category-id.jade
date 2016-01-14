@@ -1,0 +1,41 @@
+//- view/categories-id.jade
+extend layout
+
+block head
+    style
+        | img{width: 100px}
+
+block content
+    h1.jumbotron The Categories
+    h1
+        | Categories
+
+    .category-add-new
+        a.btn.btn-success(href="/categories/add")
+            | Add new Category
+
+    ul.pagination
+        - for(var i = 1; i <= pages; i++)
+        li
+            if i == page
+                a.current(href="/categories?page=" + i)
+                    =i
+            else
+                a(href="/categories?page=" + i)
+                    =i
+    ul.media-list
+        each advert in data.items
+            li.media
+                .media-left
+                    a
+                        if advert.image
+                            img.media-object(src=advert.image)
+                        else
+                            img.media-object(src="images/advert-default.jpg")
+                .media-body
+                    h2.media-heading= advert.name
+                    p= advert.description
+                    em= advert.date
+                    br
+                    a.btn(href='/adverts/' + advert._id)
+                        | View details
