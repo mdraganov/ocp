@@ -7,8 +7,9 @@ let router = new express.Router();
 
 let mongoose = require('mongoose');
 let User = mongoose.model('User');
+let Advert = mongoose.model('Advert');
 
-let controller = require('../controllers/user-controller')(User);
+let controller = require('../controllers/user-controller')(User, Advert);
 
 router.get('/profile',controller.getProfile)
     .get('/profile/:id', controller.getById);

@@ -2,9 +2,8 @@
 extends layout
 
 block content
-    h2='Username '
-        | #{user.username}
+    h2= user.username + '\'s profile'
     ul.media-list
-        each advert in user.adverts
+        each advert in ads
             li
              |  advert

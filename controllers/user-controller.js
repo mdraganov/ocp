@@ -6,7 +6,7 @@ let encryption = require('../helpers/encryption');
 const DEFAULT_PAGE = 1;
 const DEFAULT_SIZE = 10;
 
-module.exports = function(User) {
+module.exports = function(User, Advert) {
     let controller = {
         getRegister: function(req, res) {
             res.render('register');
@@ -23,7 +23,10 @@ module.exports = function(User) {
                     return;
                 }
 
-                res.render('user-details', {user:user});
+                Advert.find({owner: {id: id}}, function (err, ads) {
+                    console.log(ads);
+                    res.render('user-details', {user:user, ads: ads});
+                });
             });
         },
         postRegister: function(req, res) {
