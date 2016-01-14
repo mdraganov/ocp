@@ -1,0 +1,16 @@
+//- view/advert-add.jade
+extend layout
+
+block content
+    h1 Add new Category
+
+    form.form-horizontal(action="/categories/add", method="POST")
+
+        .form-group
+            label.col-sm-2.control-label(for="tb-name")
+                | Name:
+            .col-sm-10
+                input.form-control#tb-name(name="name", placeholder="Name")
+        .form-group
+            button.btn.btn-primary.col-sm-12 Add Category
+
