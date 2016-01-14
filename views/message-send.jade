@@ -1,0 +1,27 @@
+//- view/message-add.jade
+extend layout
+
+block content
+h1 Send new message
+
+form.form-horizontal(action="/users/messages", method="POST", enctype="multipart/form-data")
+
+    .form-group
+label.col-sm-2.control-label(for="tb-name")
+    | To:
+    .col-sm-10
+input.form-control#tb-name(name="name", placeholder="Name")
+    .form-group
+label.col-sm-2.control-label(for="tb-subject")
+    | Subject:
+    .col-sm-10
+input.form-control#tb-subject(name="subject", placeholder="subject")
+    .form-group
+label.col-sm-2.control-label(for="tb-text")
+    | Message text:
+    .col-sm-10
+input.form-control#tb-text(name="text", placeholder="Text")
+    .form-group
+button.btn.btn-default.col-sm-12 Send
+
+
