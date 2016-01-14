@@ -19,7 +19,6 @@ module.exports = function(Advert) {
             // res.redirect('error')
             throw err;
           }
-
           Advert.count({})
             .exec(function(err, count) {
               res.render('adverts-all', {
