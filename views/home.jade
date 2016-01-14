@@ -28,4 +28,4 @@ block content
                     a.btn(href='/adverts/' + advert._id)
                         | View details
                     a.btn(href='/users/profile/' + advert.owner.id)
-                        = advert.owner.name
+                        = 'From: ' + advert.owner.name
