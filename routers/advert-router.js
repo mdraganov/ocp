@@ -24,8 +24,9 @@ let router = new express.Router();
 module.exports = function (app) {
     let mongoose = require('mongoose');
     let Advert = mongoose.model('Advert');
+    let Category = mongoose.model('Category');
 
-    let controller = require('../controllers/advert-controller')(Advert, app);
+    let controller = require('../controllers/advert-controller')(Advert,app,Category);
 
     router.get('/', controller.get)
         .get('/add', controller.getForm)
