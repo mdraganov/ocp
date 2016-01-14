@@ -2,8 +2,22 @@
 extends layout
 
 block content
-    h2= user.username + '\'s profile'
+    h1= user.username + '\'s profile'
+    h2= user.username + ' has ' + data.length + ' adverts.'
+    h2 Adverts:
     ul.media-list
-        each advert in ads
-            li
-             |  advert
+        each advert in data
+            li.media
+                .media-left
+                    a
+                        if advert.image
+                            img.media-object(src=advert.image)
+                        else
+                            img.media-object(src="images/advert-default.jpg")
+                .media-body
+                    h2.media-heading= advert.name
+                    p= advert.description
+                    em= advert.date
+                    br
+                    a.btn(href='/adverts/' + advert._id)
+                        | View details

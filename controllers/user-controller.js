@@ -23,10 +23,16 @@ module.exports = function(User, Advert) {
                     return;
                 }
 
-                Advert.find({owner: {id: id}}, function (err, ads) {
-                    console.log(ads);
-                    res.render('user-details', {user:user, ads: ads});
-                });
+                Advert.find()
+                    .where('owner.id')
+                    .equals(id)
+                    .exec(function (err, ads) {
+                        console.log(ads);
+                        res.render('user-details', {
+                            data: ads,
+                            user: user
+                        });
+                    });
             });
         },
         postRegister: function(req, res) {
