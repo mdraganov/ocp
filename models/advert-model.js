@@ -15,6 +15,9 @@ let advertSchema = new mongoose.Schema({
             return Date.now();
         }
     },
+    category:{
+      type:String
+    },
     price: {
         type: Number
     },

@@ -1,3 +1,6 @@
+var DEFAULT_PAGE = 1;
+var DEFAULT_SIZE = 10;
+
 module.exports = function(Category){
 
     function get(request,response){
@@ -13,13 +16,43 @@ module.exports = function(Category){
         });
     }
 
-    function getById(request,response){
-        Category.findById(request.params.id,function(err,category){
-            if(err || !category){
-                response.status(404);
+   function getAll(req, res) {
+        var page = req.query.page || DEFAULT_PAGE;
+        var size = req.query.size || DEFAULT_SIZE;
+        Category.find({})
+            .skip((page - 1) * size)
+            .limit(size)
+            .exec(function (err, categories) {
+                if (err) {
+                    // res.redirect('error')
+                    throw err;
+                }
+                Category.count({})
+                    .exec(function (err, count) {
+                        console.log(categories);
+                        res.render('categories-list', {
+                            data: categories,
+                            pages: (count / size) | 0 + 1,
+                            page: page
+                        });
+                    });
+            });
+    }
+
+    function getById(req, res) {
+        var id = req.params.id;
+        Category.findById(id, function (err, category) {
+            if (err) {
+                throw err;
             }
-            response.json({
-                result:category
+
+            if (!category) {
+                res.redirect('error-not-found');
+                return;
+            }
+            console.log(category);
+            res.render('category-id', {
+                data: category
             });
         });
     }
@@ -30,16 +63,25 @@ module.exports = function(Category){
             if(error){
                 throw error;
             }
-            response.status(201).json({
-                result:category
-            });
+            response.redirect('/categories/all');
         });
+    }
+
+    function getForm(request,response){
+        response.render('categories-list');
+    }
+
+    function getAddForm(request,response){
+        response.render('categories-add');
     }
 
     var controller = {
         get:get,
         getById:getById,
-        post:post
+        post:post,
+        getForm:getForm,
+        getAll:getAll,
+        getAddForm:getAddForm
     }
 
     return controller;

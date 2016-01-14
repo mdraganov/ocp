@@ -5,7 +5,7 @@ block content
   h1 Add new advertisement
 
   form.form-horizontal(action="/adverts", method="POST", enctype="multipart/form-data")
-  
+
     .form-group
       label.col-sm-2.control-label(for="tb-name")
         | Name:
@@ -16,6 +16,11 @@ block content
         | Description:
       .col-sm-10
         input.form-control#tb-description(name="description", placeholder="Description")
+    .form-group
+      label.col-sm-2.control-label(for="tb-category")
+        | Category:
+      .col-sm-10
+        input.form-control#tb-category(name="category", placeholder="Category")
     .form-group
       label.col-sm-2.control-label(for="tb-price")
         | Price:
