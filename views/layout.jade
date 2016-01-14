@@ -12,9 +12,10 @@ html
           .container-fluid
             ul.nav.navbar-nav
               each tab in [{link:'home', title:'Home'}, {link:'adverts', title:'Adverts'}, {link:'adverts/add', title: 'Add'}]
-                li
-                  a(href='/' + tab.link)
-                    =tab.title
+                if (!(!currentUser && tab.title == 'Add'))
+                  li
+                    a(href='/' + tab.link)
+                      =tab.title
             ul.nav.navbar-nav.navbar-right
               if (currentUser)
                 li

@@ -1,0 +1,31 @@
+//- view/adverts-all.jade
+extend layout
+
+block head
+    style
+        | img{width: 100px}
+
+block content
+    .jumbotron
+        h1 Welcome to OCP the free Online Classifieds Platform
+        h2
+            strong= 'We have ' + adCount + ' ads and ' + userCount + ' users!'
+
+    ul.media-list
+        each advert in data
+            li.media
+                .media-left
+                    a
+                        if advert.image
+                            img.media-object(src=advert.image)
+                        else
+                            img.media-object(src="images/advert-default.jpg")
+                .media-body
+                    h2.media-heading= advert.name
+                    p= advert.description
+                    em= advert.date
+                    br
+                    a.btn(href='/adverts/' + advert._id)
+                        | View details
+                    a.btn(href='/users/profile/' + advert.owner.id)
+                        = advert.owner.name

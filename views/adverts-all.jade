@@ -6,13 +6,13 @@ block head
     | img{width: 100px}
 
 block content
-  h1.jumbotron The advertisements
   h1
     | Adverts
-  
-  .advert-add-new
-    a.btn.btn-success(href="/adverts/add")
-      | Add new advert
+
+  if (currentUser)
+    .advert-add-new
+      a.btn.btn-success(href="/adverts/add")
+        | Add new advert
     
   ul.pagination
     - for(var i = 1; i <= pages; i++)

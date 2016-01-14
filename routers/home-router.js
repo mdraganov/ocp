@@ -8,8 +8,9 @@ let router = new express.Router();
 let mongoose = require('mongoose');
 
 let Advert = mongoose.model('Advert');
+let User = mongoose.model('User');
 
-let controller = require('../controllers/home-controller')(Advert);
+let controller = require('../controllers/home-controller')(Advert, User);
 
 router.get('/', controller.get);
 

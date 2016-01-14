@@ -23,6 +23,7 @@ module.exports = function(Advert, app) {
             .exec(function(err, count) {
               res.render('adverts-all', {
                 data: adverts,
+                currentUser: req.user,
                 pages: (count / size) | 0 + 1,
                 page: page
               });
