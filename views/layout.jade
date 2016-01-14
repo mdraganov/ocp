@@ -12,7 +12,7 @@ html
           .container-fluid
             ul.nav.navbar-nav
               each tab in [{link:'home', title:'Home'}, {link:'adverts', title:'Adverts'},{link:'categories/all',title:'Categories'}, {link:'adverts/add', title: 'Add'}]
-                if (!(!currentUser && tab.title == 'Add'))
+                if (!(!currentUser && tab.title == 'Add') && !(!currentUser && tab.title=='Categories'))
                   li
                     a(href='/' + tab.link)
                       =tab.title
