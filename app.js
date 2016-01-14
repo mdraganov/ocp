@@ -1,14 +1,14 @@
 // app.js
-
 'use strict';
 
 let express = require('express');
-
+let config = require('./config/config');
 let app = express();
 
-require('./config')(app);
-
 require('./models');
+require('./config/mongoose')(config.db);
+require('./config/express')(app);
+require('./config/passport')();
 
 require('./routers')(app);
 

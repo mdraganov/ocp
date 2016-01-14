@@ -1,17 +1,15 @@
 // controllers/advert-controller.js
 
 'use strict';
+let encryption = require('../helpers/encryption');
 
 const DEFAULT_PAGE = 1;
 const DEFAULT_SIZE = 10;
 
 module.exports = function(User) {
     let controller = {
-        getForm: function(req, res) {
-            //check if user is authenticated
-            res.render('advert-add');
-            //else
-            //res.redirect('login');
+        getRegister: function(req, res) {
+            res.render('register');
         },
         getById: function(req, res) {
             let id = req.params.id;
@@ -25,28 +23,35 @@ module.exports = function(User) {
                     return;
                 }
 
-                res.render('user-details', {
-                    data: user
+                res.render('user-details', {user:user});
+            });
+        },
+        postRegister: function(req, res) {
+            var newUserData = req.body;
+            newUserData.salt = encryption.generateSalt();
+            newUserData.hashPass = encryption.generateHashedPassword(newUserData.salt, newUserData.password);
+            (new User(newUserData)).save(function(err, user) {
+                if (err) {
+                    console.log('Failed to register new user: ' + err);
+                    return;
+                }
+
+                req.logIn(user, function (err) {
+                    if (err) {
+                        res.status(400);
+                        return res.send({reason: err.toString()});
+                    }
+                    else {
+                        res.redirect('/');
+                    }
                 });
             });
         },
-        post: function(req, res) {
-            let reqUser = req.body;
-            console.log(req.file);
-            //validate advert
-
-            let user = new User({
-                name: reqUser.name
-            });
-
-            user.save(function(err) {
-                if (err) {
-                    throw err;
-                }
-
-                res.status(201)
-                    .redirect('/users/' + user._id);
-            });
+        getLogin:function(req,res){
+            res.render('login');
+        },
+        getProfile:function(req,res){
+            res.redirect('/users/profile/' + req.user._id);
         }
     };
 

@@ -10,9 +10,8 @@ let User = mongoose.model('User');
 
 let controller = require('../controllers/user-controller')(User);
 
-router.get('/register', controller.getForm)
-    .get('/:id', controller.getById)
-    .post('/register', controller.post);
+router.get('/profile',controller.getProfile)
+    .get('/profile/:id', controller.getById);
 
 module.exports = function(app) {
     app.use('/users', router);
